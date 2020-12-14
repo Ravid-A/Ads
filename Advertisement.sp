@@ -76,15 +76,11 @@ public void OnPluginStart()
 	char sDirPath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, sDirPath, PLATFORM_MAX_PATH, "configs/Ads.cfg");
 	File hFile = OpenFile(sDirPath, "a+");
+	LoadAds();
 	delete hFile;
 }
 
 /* Events */
-
-public void OnMapStart()
-{
-	LoadAds();
-}
 
 public void OnMapEnd()
 {
