@@ -2,7 +2,7 @@
 
 ## Advetisement System:
 
-Command:
+**Command:**
 
 **sm_ads** - For Root Admins Only
 
