@@ -1,6 +1,7 @@
 [![Github All Releases](https://img.shields.io/github/downloads/Ravid-A/Ads/total.svg)]()
 
 Advetisement System:
+
 Command:
 sm_ads - For Root Admins Only
 
