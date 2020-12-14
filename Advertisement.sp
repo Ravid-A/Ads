@@ -75,8 +75,8 @@ public void OnPluginStart()
 	
 	char sDirPath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, sDirPath, PLATFORM_MAX_PATH, "configs/Ads.cfg");
-	Handle hFile = OpenFile(sDirPath, "a+");
-	CloseHandle(hFile);
+	File hFile = OpenFile(sDirPath, "a+");
+	delete hFile;
 }
 
 /* Events */
@@ -90,9 +90,9 @@ public void OnMapEnd()
 {
 	char sDirPath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, sDirPath, PLATFORM_MAX_PATH, "configs/Ads.cfg");
-	Handle hFile = OpenFile(sDirPath, "w+");
+	File hFile = OpenFile(sDirPath, "w+");
 	UpdateAds();
-	CloseHandle(hFile);
+	delete hFile;
 }
 
 public Action OnClientSayCommand(int client, const char[] command, const char[] szArgs)
