@@ -156,11 +156,11 @@ void showAdsMenu(int client)
 	menu.AddItem("", "Add Advertisement\n ", g_iNumOfAds == MAX_ADS ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 	
 	if (g_iNumOfAds == 0)
-		menu.AddItem("", "There Are No Ads")
+		menu.AddItem("", "There Are No Ads", ITEMDRAW_DISABLED);
 	else
 	{
-		menu.AddItem("", "Ads For Admins Only", getNumOfAds(true) > 0 ? ITEMDRAW_DEFAULT:ITEMDRAW_DISABLED)
-		menu.AddItem("", "Ads For Everyone", getNumOfAds(false) > 0 ? ITEMDRAW_DEFAULT:ITEMDRAW_DISABLED)
+		menu.AddItem("", "Ads For Admins Only", getNumOfAds(true) > 0 ? ITEMDRAW_DEFAULT:ITEMDRAW_DISABLED);
+		menu.AddItem("", "Ads For Everyone", getNumOfAds(false) > 0 ? ITEMDRAW_DEFAULT:ITEMDRAW_DISABLED);
 	}
 	
 	menu.Display(client, MENU_TIME_FOREVER);
@@ -278,7 +278,7 @@ public int Handler_AddAd(Menu menu, MenuAction action, int client, int itemNum)
 						{
 							ReplaceString(szAd, sizeof(szAd), g_szColorTag[iColorHint], g_szColorHint[iColorHint]);
 						}
-						Format(szAd, sizeof(szAd), "<font color='008000'>Play-IL</font> The Ad:\n%s", szAd);
+						Format(szAd, sizeof(szAd), "<font color='008000'>Advertisement</font> The Ad:\n%s", szAd);
 						PrintHintText(client, szAd);
 					} else {
 						SetHudTextParams(-1.0, 0.1, 5.0, 0, 255, 0, 0, 1, 0.1, 0.1, 0.1);
@@ -286,7 +286,7 @@ public int Handler_AddAd(Menu menu, MenuAction action, int client, int itemNum)
 						{
 							ReplaceString(szAd, sizeof(szAd), g_szColorTag[iColorHud], "");
 						}
-						Format(szAd, sizeof(szAd), "[Play-IL] The Ad:\n%s", szAd);
+						Format(szAd, sizeof(szAd), "[Advertisement] The Ad:\n%s", szAd);
 						ShowHudText(client, 10, szAd);
 					}
 				}
@@ -385,7 +385,7 @@ public int Handler_ManageAd(Menu menu, MenuAction action, int client, int itemNu
 						{
 							ReplaceString(szAd, sizeof(szAd), g_szColorTag[iColorHint], g_szColorHint[iColorHint]);
 						}
-						Format(szAd, sizeof(szAd), "<font color='#008000'>Play-IL</font> The Ad:\n%s", szAd);
+						Format(szAd, sizeof(szAd), "<font color='#008000'>Advertisement</font> The Ad:\n%s", szAd);
 						PrintHintText(client, szAd);
 					} else {
 						SetHudTextParams(-1.0, 0.1, 5.0, 0, 255, 0, 0, 1, 0.1, 0.1, 0.1);
@@ -393,7 +393,7 @@ public int Handler_ManageAd(Menu menu, MenuAction action, int client, int itemNu
 						{
 							ReplaceString(szAd, sizeof(szAd), g_szColorTag[iColorHud], "");
 						}
-						Format(szAd, sizeof(szAd), "[Play-IL] The Ad:\n%s", szAd);
+						Format(szAd, sizeof(szAd), "[Advertisement] The Ad:\n%s", szAd);
 						ShowHudText(client, 10, szAd);
 					}
 				}
@@ -509,7 +509,8 @@ void editAd(int adId, char[] key, const char[] value)
 	else if (StrEqual(key, "Time"))
 	{
 		g_esAd[adId].iTime = StringToInt(value);
-		KillTimer(g_hAdTimer[adId]);
+		if (g_hAdTimer[adId] != INVALID_HANDLE)
+			KillTimer(g_hAdTimer[adId]);
 		
 		float fAdTimer = float(g_esAd[adId].iTime) * 60;
 		g_hAdTimer[adId] = CreateTimer(fAdTimer, Timer_RepeatAd, adId, TIMER_REPEAT);
