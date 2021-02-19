@@ -2,7 +2,7 @@
 #include <multicolors>
 
 #define PLUGIN_AUTHOR "OverWolf (Ravid)"
-#define PLUGIN_VERSION "1.0"
+#define PLUGIN_VERSION "1.3"
 #define PREFIX " \x04[Advertisement]\x01"
 #define PREFIX_MENU "[Advertisement]"
 
